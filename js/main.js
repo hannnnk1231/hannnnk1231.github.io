@@ -1,191 +1,241 @@
- AOS.init({
- 	duration: 800,
- 	easing: 'slide'
- });
+/*****************************************************************************
+  ____                                  _____ _
+ / ___|___  ___ _ __ ___   ___  ___    |_   _| |__   ___ _ __ ___   ___  ___
+| |   / _ \/ __| '_ ` _ \ / _ \/ __|_____| | | '_ \ / _ \ '_ ` _ \ / _ \/ __|
+| |__| (_) \__ \ | | | | | (_) \__ \_____| | | | | |  __/ | | | | |  __/\__ \
+ \____\___/|___/_| |_| |_|\___/|___/     |_| |_| |_|\___|_| |_| |_|\___||___/
 
-(function($) {
+******************************************************************************/
 
-	"use strict";
+/************ Site Main Js **************************************
 
-	$(window).stellar({
-    responsive: true,
-    parallaxBackgrounds: true,
-    parallaxElements: true,
-    horizontalScrolling: false,
-    hideDistantElements: false,
-    scrollProperty: 'scroll'
-  });
+    Template Name: Clarks - Vcard Template
+    Author: cosmos-themes
+    Envato Profile: https://themeforest.net/user/cosmos-themes
+    version: 1.0
+    Copyright: 2018
 
+****************************************************************/
 
-	var fullHeight = function() {
+/*======== Window Load Function ========*/
+$(window).on('load', function(){
 
-		$('.js-fullheight').css('height', $(window).height());
-		$(window).resize(function(){
-			$('.js-fullheight').css('height', $(window).height());
-		});
+    /*======== Preloader Setup ========*/
+    $(".loading-text").delay(1000).fadeOut("slow");
+    $(".preloader").delay(2000).fadeOut("slow");
 
-	};
-	fullHeight();
-
-	// loader
-	var loader = function() {
-		setTimeout(function() { 
-			if($('#ftco-loader').length > 0) {
-				$('#ftco-loader').removeClass('show');
-			}
-		}, 1);
-	};
-	loader();
-
-	// Scrollax
-   $.Scrollax();
-
-
-   var burgerMenu = function() {
-
-		$('.js-colorlib-nav-toggle').on('click', function(event){
-			event.preventDefault();
-			var $this = $(this);
-
-			if ($('body').hasClass('offcanvas')) {
-				$this.removeClass('active');
-				$('body').removeClass('offcanvas');	
-			} else {
-				$this.addClass('active');
-				$('body').addClass('offcanvas');	
-			}
-		});
-	};
-	burgerMenu();
-
-	// Click outside of offcanvass
-	var mobileMenuOutsideClick = function() {
-
-		$(document).click(function (e) {
-	    var container = $("#colorlib-aside, .js-colorlib-nav-toggle");
-	    if (!container.is(e.target) && container.has(e.target).length === 0) {
-
-	    	if ( $('body').hasClass('offcanvas') ) {
-
-    			$('body').removeClass('offcanvas');
-    			$('.js-colorlib-nav-toggle').removeClass('active');
-			
-	    	}
-	    	
-	    }
-		});
-
-		$(window).scroll(function(){
-			if ( $('body').hasClass('offcanvas') ) {
-
-    			$('body').removeClass('offcanvas');
-    			$('.js-colorlib-nav-toggle').removeClass('active');
-			
-	    	}
-		});
-
-	};
-	mobileMenuOutsideClick();
-
-	var carousel = function() {
-		$('.home-slider').owlCarousel({
-	    loop:true,
-	    autoplay: true,
-	    margin:0,
-	    animateOut: 'fadeOut',
-	    animateIn: 'fadeIn',
-	    nav:false,
-	    autoplayHoverPause: false,
-	    items: 1,
-	    navText : ["<span class='ion-md-arrow-back'></span>","<span class='ion-chevron-right'></span>"],
-	    responsive:{
-	      0:{
-	        items:1
-	      },
-	      600:{
-	        items:1
-	      },
-	      1000:{
-	        items:1
-	      }
-	    }
-		});
-
-	};
-	carousel();
-
-	
-
-	var contentWayPoint = function() {
-		var i = 0;
-		$('.ftco-animate').waypoint( function( direction ) {
-
-			if( direction === 'down' && !$(this.element).hasClass('ftco-animated') ) {
-				
-				i++;
-
-				$(this.element).addClass('item-animate');
-				setTimeout(function(){
-
-					$('body .ftco-animate.item-animate').each(function(k){
-						var el = $(this);
-						setTimeout( function () {
-							var effect = el.data('animate-effect');
-							if ( effect === 'fadeIn') {
-								el.addClass('fadeIn ftco-animated');
-							} else if ( effect === 'fadeInLeft') {
-								el.addClass('fadeInLeft ftco-animated');
-							} else if ( effect === 'fadeInRight') {
-								el.addClass('fadeInRight ftco-animated');
-							} else {
-								el.addClass('fadeInUp ftco-animated');
-							}
-							el.removeClass('item-animate');
-						},  k * 50, 'easeInOutExpo' );
-					});
-					
-				}, 100);
-				
-			}
-
-		} , { offset: '95%' } );
-	};
-	contentWayPoint();
-
-
-	// magnific popup
-	$('.image-popup').magnificPopup({
-    type: 'image',
-    closeOnContentClick: true,
-    closeBtnInside: false,
-    fixedContentPos: true,
-    mainClass: 'mfp-no-margins mfp-with-zoom', // class to remove default margin from left and right side
-     gallery: {
-      enabled: true,
-      navigateByImgClick: true,
-      preload: [0,1] // Will preload 0 - before current, and 1 after the current image
-    },
-    image: {
-      verticalFit: true
-    },
-    zoom: {
-      enabled: true,
-      duration: 300 // don't foget to change the duration also in CSS
+    /*======== Isotope Setup ========*/
+    if ($('.portfolio-items').length) {
+        var $elements = $(".portfolio-items"),
+            $filters = $('.portfolio-filter ul li');
+        $elements.isotope();
+        $filters.on('click', function() {
+            $filters.removeClass('active');
+            $(this).addClass('active');
+            var selector = $(this).data('filter');
+            $(".portfolio-items").isotope({
+                filter: selector,
+            });
+        });
     }
-  });
+});
+/*======== Document Ready Function ========*/
+$(document).ready(function() {
+    "use strict";
 
-  $('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
-    disableOn: 700,
-    type: 'iframe',
-    mainClass: 'mfp-fade',
-    removalDelay: 160,
-    preloader: false,
+    /*======== Text Slideshow Setup ========*/
+    if($('.text-slideshow').length) {
+        animateText();
+    }
 
-    fixedContentPos: false
-  });
+    /*======== SimpleBar Setup ========*/
+    $('.pages-stack .page').each(function() {
+        var $id = '#' + $(this).attr('id');
+        new SimpleBar($($id)[0], {
+            scrollbarMinSize: 15
+        });
+    });
 
 
+    /*======== Portfolio Image Link Setup ========*/
+    $('.portfolio-items .image-link').magnificPopup({
+        type: 'image',
+    });
+
+    /*======== Portfolio Video Link Setup ========*/
+    $('.portfolio-items .video-link').magnificPopup({
+        type: 'iframe',
+    });
+
+    /*========Testimonials OwlCarousel Setup========*/
+    $(".testimonials .owl-carousel").owlCarousel({
+        loop: true,
+        margin: 30,
+        autoplay: true,
+        smartSpeed: 500,
+        responsiveClass: true,
+        dots: false,
+        autoplayHoverPause: true,
+        responsive: {
+            0: {
+                items: 1,
+            },
+            800: {
+                items: 1,
+            },
+            992: {
+                items: 2,
+            },
+        },
+    });
+
+    /*========Clients OwlCarousel Setup========*/
+    $(".clients .owl-carousel").owlCarousel({
+        loop: true,
+        margin: 30,
+        autoplay: true,
+        smartSpeed: 500,
+        responsiveClass: true,
+        autoplayHoverPause: true,
+        dots: false,
+        responsive: {
+            0: {
+                items: 2,
+            },
+            575: {
+                items: 3,
+            },
+            768: {
+                items: 4,
+            },
+            1000: {
+                items: 6,
+            },
+        },
+    });
+
+    /*======== Google Map Setup ========*/
+    if($('#map').length) {
+        initMap();
+    }
+
+    /*======== Google Map on Contact Page ========*/
+    $(window).on('hashchange', function() {
+        setTimeout(function() {
+            if(window.location.hash.slice(2) === "contact") {
+                if($('#map').length) {
+                    initMap();
+                }
+            }
+        }, 500);
+    });
+
+    /*======== Contact Form Setup ========*/
+    contactFormSetup();
+
+});
+
+/********** Function Map Initialization **********/
+function initMap() {
+    var latitude = $("#map").data('latitude'),
+        longitude = $("#map").data('longitude'),
+        zoom = $("#map").data('zoom'),
+        cordinates = new google.maps.LatLng(latitude, longitude);
+
+    var styles = [ { "stylers": [ { "hue": "#ff1a00" }, { "invert_lightness": true }, { "saturation": -100 }, { "lightness": 33 }, { "gamma": 0.5 } ] }, { "featureType": "water", "elementType": "geometry", "stylers": [ { "color": "#2a2b30" } ] } ];
+    var mapOptions = {
+        zoom: zoom,
+        center: cordinates,
+        mapTypeControl: false,
+        disableDefaultUI: true,
+        zoomControl: true,
+        scrollwheel: false,
+        styles: styles,
+    };
+
+    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    var marker = new google.maps.Marker({
+        position: cordinates,
+        map: map,
+        title: "We are here!"
+    });
+
+}
+
+/********** Function Contact Form Setup **********/
+function contactFormSetup() {
+
+    /*======== Check Field Have Value When Page Load ========*/
+    $('.input-field').each(function() {
+        if($(this).val()) {
+            $(this).addClass('input--filled');
+        } else {
+            $(this).removeClass('input--filled');
+        }
+    });
+
+    /*======== Check Field Have Value When Keyup ========*/
+    $('.input-field').on('keyup', function() {
+        if($(this).val()) {
+            $(this).addClass('input--filled');
+        } else {
+            $(this).removeClass('input--filled');
+        }
+    });
 
 
-})(jQuery);
+    $('#contact-form').on('submit', function(e) {
+        e.preventDefault();
+        var name = $('#cf-name').val(),
+            email = $('#cf-email').val(),
+            message = $('#cf-message').val(),
+            required = 0;
 
+
+        $('.cf-validate', this).each(function() {
+            if($(this).val() == '') {
+                $(this).addClass('cf-error');
+                required += 1;
+            } else {
+                if($(this).hasClass('cf-error')) {
+                    $(this).removeClass('cf-error');
+                    if(required > 0) {
+                        required -= 1;
+                    }
+                }
+            }
+        });
+        if( required === 0 ) {
+            $.ajax({
+                type: 'POST',
+                url: 'mail.php',
+                data: {
+                    cf_name: name,
+                    cf_email: email,
+                    cf_message: message
+                },
+                success: function(data) {
+                    $("#contact-form .input-field").val("");
+                    showAlertBox(data.status, data.responseText);
+                },
+                error: function(data) {
+                    showAlertBox(data.status, data.responseText);
+                }
+            });
+        }
+    });
+}
+
+/********** Function Show Alert Box **********/
+function showAlertBox(response, message) {
+    var $alertBox = $('<div class="alert"></div>'),
+        $alContainer = $('#contact-form .alert-container');
+    if( response == 200 ) {
+        $alertBox.addClass('alert-success').html(message);
+        $alContainer.html($alertBox);
+    } else {
+        $alertBox.addClass('alert-danger').html(message);
+        $alContainer.html($alertBox);
+    }
+    $alContainer.fadeIn(300).delay(2000).fadeOut(400);
+}
