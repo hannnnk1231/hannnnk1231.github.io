@@ -25,7 +25,7 @@
         <script src="js/modernizr.js"></script>
 
         <!--Favicons-->
-        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="img/3.png" type="image/x-icon">
 
     </head>
 
@@ -108,7 +108,21 @@
             <!--Banner Page Start-->
             <section id="home"  class="page section-home" style="background-image: url('img/background/bg-img.jpg');">
 
-                <div id="video-container"></div>
+                <!--Slider Start-->
+                <div class="banner-slider">
+                    <div id="slides">
+                        <div class="slides-container">
+                            <!--Slide 1-->
+                            <img src="img/background/slider/img-1.jpg" alt="">
+                            <!--Slide 2-->
+                            <img src="img/background/slider/img-2.jpg" alt="">
+                            <!--Slide 3-->
+                            <img src="img/background/slider/img-3.jpg" alt="">
+                            <img src="img/background/slider/img-4.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <!--Slider End-->
 
                 <div class="banner-text">
                     <div class="profile-img">
@@ -118,7 +132,7 @@
                     <h4>Hank Huang</h4>
 
                     <div class="text-slideshow" data-effect="fx12">
-                        <div class="text-slide text-slide--current"><h2 class="animate-title">ML/Blockchain Developer</h2></div>
+                        <div class="text-slide text-slide--current"><h2 class="animate-title">Blockchain Developer</h2></div>
                         <div class="text-slide"><h2 class="animate-title">Data Scientist</h2></div>
                         <div class="text-slide"><h2 class="animate-title">Photographer</h2></div>
                         <div class="text-slide"><h2 class="animate-title">Magician</h2></div>
@@ -737,6 +751,13 @@
         <script src="https://maps.googleapis.com/maps/api/js?key={YOUR-API-KEY}"></script>
         <!--Site Main JS-->
         <script src="js/main.js"></script>
+        <script>
+        //Super Slider
+        $('#slides').superslides({
+            animation: 'fade',
+            play: 3000
+        });
+        </script>
         <script>
 $('#video-container').YTPlayer({
     videoURL: 'https://youtu.be/9hWK-x6_uJw',
