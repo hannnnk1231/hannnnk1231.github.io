@@ -1194,6 +1194,7 @@ header .menu-button.menu-button--open span:nth-child(3) {
 	color: #fff;
 	font-weight: 700;
 	letter-spacing: 2px;
+	text-shadow: black 0.1em 0.1em 0.2em
 }
 
 .page.section-home .banner-text h4 {
@@ -1203,6 +1204,7 @@ header .menu-button.menu-button--open span:nth-child(3) {
 	text-transform: uppercase;
 	margin-bottom: 20px;
 	font-family: "Open Sans", sans-serif;
+	text-shadow: black 0.1em 0.1em 0.2em
 }
 
 .page.section-home #video-container {
